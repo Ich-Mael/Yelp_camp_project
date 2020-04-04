@@ -1,5 +1,28 @@
 <%- include ('partials/header') %>
+<style>
+ body{
+     background-image: url('https://media.gettyimages.com/photos/the-chinese-metallurgical-corporation-camp-at-mes-aynak-in-logar-to-picture-id154057096?s=2048x2048');
+     background-repeat: no-repeat;
+     background-attachment: fixed;
+     background-position: cover;
+ }
+ #content{
+     min-height: 100vh;
+     margin: 10rem ;
+ }
+ #brand{
+     font-size: 4rem;
+     margin: 5rem 0;
+ }
 
-<h1>Welcome to Yelp Camp</h1>
-<a href="/campgrounds">View all campgrounds</a>
+ #camp-link{
+     /* text-decoration: none; */
+     color:skyblue;
+     font-size: 2.5rem; 
+ }
+</style>
+<div id="content" class="container text-center">
+        <h1 id="brand">Welcome to Yelp Camp</h1>
+        <a id="camp-link" href="/campgrounds">View all campgrounds</a>
+</div>
 <%- include ('partials/footer') %>

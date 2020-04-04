@@ -1,10 +1,16 @@
 <%- include ('partials/header') %>
-<h1>Create a new Campround</h1>
-<form action="/campgrounds" method="POST" >
-    <input name="campName" placeholder="Camp Name" type="text" value=""/>
-    <input name="campUrl" type="text" placeholder="Image Url" value=""/>
-    <button type="submit">Submit</button>
-</form>
-
-<a href="/campgrounds">Go Back</a>
-<%- include ('partials/footer') %>
+<div class="container">
+    <h1 class="text-center">Create a new Campround</h1>
+    <form action="/campgrounds" class="text-center" style="width: 400px; margin:0 auto" method="POST" >
+        <div class="form-group">
+            <input name="campName" class="form-control" placeholder="Camp name" type="text" value=""/>
+        </div>
+        <div class="form-group">
+            <input name="campUrl" class="form-control" type="text" placeholder="Image url" value=""/>
+        </div>
+        <div class="form-group">
+            <button class="btn btn-lg btn-success" type="submit">Submit</button>
+        </div>
+        <a class="text-center" href="/campgrounds">Go Back</a>
+    </form>
+</div>
