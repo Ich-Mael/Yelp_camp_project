@@ -5,6 +5,10 @@ const bodyParser = require("body-parser");
 const mongoose = require('mongoose');
 mongoose.connect("mongodb://localhost/yelp-camp",{useNewUrlParser: true, useUnifiedTopology: true});
 
+app.use(bodyParser.urlencoded({extended: true}));
+app.set("view engine", "ejs");
+
+
 // setting the schema
 
 let campgroundSchema = new mongoose.Schema({
@@ -14,28 +18,20 @@ let campgroundSchema = new mongoose.Schema({
 
 let Campground = mongoose.model("campground", campgroundSchema);
 
-Campground.create({name: "Namek",
-                    image: "https://media.gettyimages.com/photos/birthday-party-picture-id1035763336?s=2048x2048"},
-                  (err, campground)=>{
-                      if(err){
-                          console.log(err);
-                      }else{
-                          console.log(campground);
-                      }
-                  });
+// adding campground to the database
 
 
-app.use(bodyParser.urlencoded({extended: true}));
-app.set("view engine", "ejs");
 
-let camps=[
-    {name: "Namek",
-     image: "https://media.gettyimages.com/photos/birthday-party-picture-id1035763336?s=2048x2048"},
-    {name: "Ecuomondo",
-     image: "https://media.gettyimages.com/photos/children-having-fun-in-ropes-course-adventure-park-picture-id689947182?s=2048x2048"},
-    {name: "Marine Ford",
-     image: "https://media.gettyimages.com/photos/group-of-kids-in-a-tugofwar-game-picture-id498425450?s=2048x2048"}
-];
+
+// let camps=[
+//     {name: "Namek",
+//      image: "https://media.gettyimages.com/photos/birthday-party-picture-id1035763336?s=2048x2048"},
+//     {name: "Ecuomondo",
+//      image: "https://media.gettyimages.com/photos/children-having-fun-in-ropes-course-adventure-park-picture-id689947182?s=2048x2048"},
+//     {name: "Marine Ford",
+//      image: "https://media.gettyimages.com/photos/group-of-kids-in-a-tugofwar-game-picture-id498425450?s=2048x2048"}
+// ]
+// ;
 
 
 // home route
@@ -44,9 +40,19 @@ app.get("/", (req, res)=>{
 });
 
 //campgrounds route
+
 app.get("/campgrounds", (req, res)=>{
-      //rendering the campgrounds page
-    res.render("campgrounds", {camps: camps});
+    // gettind all campgrounds from the DB.
+    Campground.find({}, (err, allCampgrounds)=>{
+        if(err){
+            console.log(err);
+        }else{
+            //rendering the campgrounds page
+            res.render("campgrounds", {camps: allCampgrounds});
+           console.log(allCampgrounds);
+        }
+
+    });
 });
 
 
@@ -54,10 +60,20 @@ app.get("/campgrounds", (req, res)=>{
 
 app.post("/campgrounds", (req, res)=>{
     //get a data from a form
+
     let CampName = req.body.campName;
     let campUrl = req.body.campUrl;
     let newCampground = {name: CampName, image: campUrl};
-    camps.push(newCampground);
+
+    //adding new campground to the DB
+    Campground.create({name:CampName,
+                       image:campUrl},(err, newCamp)=>{
+                          if(err){
+                              console.log(err);
+                          }else{
+                              console.log(newCamp);
+                          }
+                      });
 
     // redirect to campgrounds page
     res.redirect("/campgrounds");
