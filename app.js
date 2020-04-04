@@ -2,6 +2,28 @@
 
 const app = (require("express"))();
 const bodyParser = require("body-parser");
+const mongoose = require('mongoose');
+mongoose.connect("mongodb://localhost/yelp-camp",{useNewUrlParser: true, useUnifiedTopology: true});
+
+// setting the schema
+
+let campgroundSchema = new mongoose.Schema({
+    name: String,
+    image: String
+});
+
+let Campground = mongoose.model("campground", campgroundSchema);
+
+Campground.create({name: "Namek",
+                    image: "https://media.gettyimages.com/photos/birthday-party-picture-id1035763336?s=2048x2048"},
+                  (err, campground)=>{
+                      if(err){
+                          console.log(err);
+                      }else{
+                          console.log(campground);
+                      }
+                  });
+
 
 app.use(bodyParser.urlencoded({extended: true}));
 app.set("view engine", "ejs");
