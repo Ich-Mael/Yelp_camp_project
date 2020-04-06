@@ -1,26 +1,26 @@
-<%- include ('partials/header') %>
+    <%- include ('partials/header') %>
 
-<div class="container">
-    <header class="jumbotron text-center">
-        <h1>Welcome to YelpCamp</h1>
-        <p class="text-center">View our best places in the world for camping.</p>
-    <a class="btn btn-primary btn-lg" href="/campgrounds/new">Add a New Campgrounds</a>
-    </header>
+    <div class="container">
+        <header class="jumbotron text-center">
+            <h1>Welcome to YelpCamp</h1>
+            <p class="text-center">View our best places in the world for camping.</p>
+        <a class="btn btn-primary btn-lg" href="/campgrounds/new">Add a New Campgrounds</a>
+        </header>
 
-    <div class="row mx-5">
-        <h3 class="text-center col-12">Our Most Popular Camp Sites!</h3>
-    </div>
+        <div class="row mx-5">
+            <h3 class="text-center col-12">Our Most Popular Camp Sites!</h3>
+        </div>
 
-    <div class="row my-4">
-        <%camps.forEach((camp)=>{%>
-            <div class="col-sm-6 col-md-4 mb-2">
-                <div class="card my-3">
-                    <img alt="" class="card-img-top" width="300px" height="300px" src="<%=camp.image%>"/>
-                    <h3 class="card-body text-center"><%=camp.name%></h3>
+        <div class="row my-4">
+            <%camps.forEach((camp)=>{%>
+                <div class="col-sm-6 col-md-4 mb-2">
+                    <div class="card my-3">
+                        <img alt="" class="card-img-top" width="300px" height="300px" src="<%=camp.image%>"/>
+                        <h3 class="card-body text-center"><%=camp.name%></h3>
+        <a href="/campgrounds/<%=camp._id%>">More Info</a>
+                    </div>
                 </div>
-            </div>
-        <%})%>
+            <%})%>
+        </div>
     </div>
-    
-</div>
-<%- include ('partials/footer') %>
+    <%- include ('partials/footer') %>
