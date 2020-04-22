@@ -1,3 +1,12 @@
+<%- include ('partials/header') %>
 <h1><%=campground.name%></h1>
 <img alt="" width="300px" height="300px" src="<%=campground.image%>"/>
 <h1><%=campground.description%></h1>
+
+<% campground.comments.forEach((comment)=>{%>
+    <h1><strong><%= comment.author %></strong></h1>     
+    <p><%= comment.text %></p>
+    <button class="btn btn-default">
+   <a href="/campgrounds/<%=campground.id%>/comments/new">Add a new Comment</a>
+    </button> 
+<%}) %>

@@ -10,13 +10,15 @@
  }
 
  #camp-link{
-     /* text-decoration: none; */
+     text-decoration: none; 
      color:skyblue;
-     font-size: 2.5rem; 
+     font-family: monaco;
+     font-weight: 400;
+     font-size: 1.5rem; 
  }
 </style>
 <div id="content" class="container text-center">
-        <h1 id="brand">Welcome to Yelp Camp</h1>
-        <a id="camp-link" href="/campgrounds">View all campgrounds</a>
+        <h1 class="text-white" id="brand">Welcome to Yelp Camp</h1>
+        <a class="btn btn-success" id="camp-link" href="/campgrounds">View All Campgrounds</a>
 </div>
 <%- include ('partials/footer') %>
