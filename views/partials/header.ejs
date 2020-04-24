@@ -22,9 +22,13 @@
             </button>
             <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
                 <div class="navbar-nav">
-                    <a class="nav-item nav-link active" href="#">Sign In<span class="sr-only">(current)</span></a>
-                    <a class="nav-item nav-link" href="#">Sign Up</a>
-                    <a class="nav-item nav-link" href="#">Contact Us</a>
-                </div>
+                    <% if(currentUser === undefined){%>
+                    <a class="nav-item nav-link active" href="/login">Sign In<span class="sr-only">(current)</span></a>
+                    <a class="nav-item nav-link" href="/register">Sign Up</a>
+                    <%} else{%>
+                    <a class="nav-item nav-link text-dark" >Signed In As <%=currentUser.username%></a>
+                    <a class="nav-item float-right nav-link text-danger" href="/logout">Logout</a>
+                    <%}%>
+                 </div>
             </div>
         </nav>
