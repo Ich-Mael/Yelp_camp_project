@@ -3,12 +3,9 @@
     <h1 class="text-center text-white my-3">Comment on <%=campground.name%></h1>
     <form action="/campgrounds/<%=campground.id%>/comments" class="text-center" style="width: 400px; margin:0 auto" method="POST" >
         <div class="form-group">
-            <input name="comment[author]" class="form-control" placeholder="Author" type="text" value=""/>
-        </div>
-        <div class="form-group">
             <textarea name="comment[text]" class="form-control" type="text" placeholder="Comment..." value=""></textarea>
         </div>
-       <div class="form-group">
+	<div class="form-group">
             <button class="btn btn-lg btn-success" type="submit">Submit</button>
         </div>
         <a class="btn btn-warning" href="/campgrounds/<%=campground.id%>">Go Back</a>

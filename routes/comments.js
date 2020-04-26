@@ -27,7 +27,12 @@ router.post("/", isLoggedIn, (req,res)=>{
 	    console.log(err);
 	    res.redirect("/camprounds");
 	}else{
+	    //add username and id to comment
+	    //save comment
 	    Comment.create(req.body.comment, (err, comment)=>{
+		comment.author.id = req.user.id;
+		comment.author.username =req.user.username;
+		comment.save();  
 		campground.comments.push(comment);
 		campground.save();
 		res.redirect("/campgrounds/" + campground.id);
