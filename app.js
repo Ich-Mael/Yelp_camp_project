@@ -33,7 +33,7 @@ passport.use(new LocalStrategy(User.authenticate()));
 passport.serializeUser(User.serializeUser());
 passport.deserializeUser(User.deserializeUser());
 
-seedDB();
+//seedDB();
 // middleware for setting req.user
 
 app.use(function(req, res, next){

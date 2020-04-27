@@ -23,17 +23,22 @@ router.get("/", (req, res)=>{
 
 // adding a post to allow a user to add a campgrounds
 
-router.post("/", (req, res)=>{
+router.post("/", isLoggedIn, (req, res)=>{
     //get a data from a form
 
     let campName = req.body.campName;
     let campUrl = req.body.campUrl;
     let campDescription = req.body.description;
+    let author ={
+	id: req.user.id,
+	username: req.user.username
+    };
 
     //adding new campground to the DB
     Campground.create({name:campName,
                        image:campUrl,
-                       description:campDescription},(err, newCamp)=>{
+                       description:campDescription,
+		       author: author },(err, newCamp)=>{
                            if(err){
                                console.log(err);
                            }else{
@@ -46,7 +51,7 @@ router.post("/", (req, res)=>{
 });
     // form for a new campground
 
-    router.get("/new", (req, res)=>{
+router.get("/new", isLoggedIn, (req, res)=>{
         res.render("new");
     });
 
@@ -63,5 +68,15 @@ router.post("/", (req, res)=>{
             }
         });
     });
+
+//function to check login state
+
+function isLoggedIn(req, res, next){
+    if(req.isAuthenticated()){
+        return next();
+    }
+    res.redirect("/login");
+}
+
 
 module.exports = router ;

@@ -17,6 +17,7 @@
 		<h5 class="my-2 text-danger float-right"> $9.00/night</h5>
 		<h4 class="text-secondary ml-3"><%=campground.name%></h4>
 		<h4 class="my-5"><%=campground.description%></h4>
+		<p>Submitted By <%= campground.author.username%></p>	
 	    </div>
 	    <div class="">
 		<div class="text-right">
@@ -27,15 +28,15 @@
 		    </button>	
 		    <hr/>
 		</div> 
-		    <% campground.comments.forEach((comment)=>{%>
-			<div class="row">
-			    <div class="col-md-12">
-				<h3><strong><%= comment.author.username %></strong></h3>     
-				<span class="float-right">10 days ago</span>
-				<p><%= comment.text %></p>
-			    </div>
+		<% campground.comments.forEach((comment)=>{%>
+		    <div class="row">
+			<div class="col-md-12">
+			    <h3><strong><%= comment.author.username %></strong></h3>     
+			    <span class="float-right">10 days ago</span>
+			    <p><%= comment.text %></p>
 			</div>
-		    <%}) %>
+		    </div>
+		<%}) %>
 	    </div>	
 	</div>
     </div>	
