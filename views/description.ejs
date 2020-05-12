@@ -41,6 +41,7 @@
 			    <h3><strong><%= comment.author.username %></strong></h3>     
 			    <span class="float-right">10 days ago</span>
 			    <p><%= comment.text %></p>
+                            <a class="btn btn-xs btn-warning" href="/campgrounds/<%=campground.id%>/comments/<%=comment.id%>/edit">Edit Comment</a>
 			</div>
 		    </div>
 		<%}) %>
