@@ -11,7 +11,6 @@ const Comment = require("./models/comment");
 const Campground = require("./models/campground");
 const User = require("./models/user");
 const seedDB = require("./seed");
-
 const commentRoutes = require("./routes/comments"),
       campgroundRoutes = require("./routes/campgrounds"),
       authRoutes = require("./routes/authentication");

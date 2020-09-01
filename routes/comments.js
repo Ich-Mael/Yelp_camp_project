@@ -9,8 +9,9 @@ const express = require('express');
 const router = express.Router({mergeParams: true});
 const Campground = require("../models/campground");
 const Comment = require("../models/comment"); 
+const middlewareObj = require('../middleware');
 
-router.get("/new", isLoggedIn, (req, res)=>{
+router.get("/new", middlewareObj.isLoggedIn, (req, res)=>{
     Campground.findById(req.params.id, (err, campground)=>{
 	if(err){
 	    console.log(err);
@@ -21,7 +22,7 @@ router.get("/new", isLoggedIn, (req, res)=>{
 });
 
 
-router.post("/", isLoggedIn, (req,res)=>{
+router.post("/", middlewareObj.isLoggedIn, (req,res)=>{
     Campground.findById(req.params.id, (err, campground)=>{
 	if(err){
 	    console.log(err);
@@ -44,7 +45,7 @@ router.post("/", isLoggedIn, (req,res)=>{
 
 // edit route
 
-router.get("/:comment_id/edit", isLoggedIn, (req, res)=>{
+router.get("/:comment_id/edit",  middlewareObj.isLoggedIn, (req, res)=>{
     Comment.findById(req.params.comment_id, (err, foundComment)=>{
 	if(err){
 	    res.redirect('back');
@@ -57,7 +58,7 @@ router.get("/:comment_id/edit", isLoggedIn, (req, res)=>{
 
 // update route
 
-router.put("/:comment_id", isLoggedIn, (req, res)=>{
+router.put("/:comment_id",  middlewareObj.isLoggedIn, (req, res)=>{
     Comment.findByIdAndUpdate(req.params.comment_id, req.body.comment, (err, updatedComment)=>{
 	if(err){
 	    res.redirect('back');
@@ -78,15 +79,5 @@ router.delete("/:comment_id", (req, res)=>{
 	}
     });
 });
-
-
-//function to check login state
-
-function isLoggedIn(req, res, next){
-    if(req.isAuthenticated()){
-        return next();
-    }
-    res.redirect("/login");
-}
 
 module.exports = router;
