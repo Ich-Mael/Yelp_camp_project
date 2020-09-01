@@ -1,9 +1,9 @@
 <%- include ('../partials/header') %>
 <div class="container">
-    <h1 class="text-center text-white my-3">Edit</h1>
+    <h1 class="text-center text-white my-3">Edit comment</h1>
     <form action="/campgrounds/<%=campground_id%>/comments/<%=comment.id%>?_method=PUT"  class="text-center" style="width: 400px; margin:0 auto" method="POST" >
         <div class="form-group">
-            <textarea name="comment[text]" class="form-control" type="text" value="<%=comment.text %>"></textarea>
+            <textarea name="comment[text]" class="form-control" type="text"><%=comment.text %></textarea>
         </div>
 	<div class="form-group">
             <button class="btn btn-lg btn-success" type="submit">Submit</button>

@@ -44,7 +44,7 @@ router.post("/", isLoggedIn, (req,res)=>{
 
 // edit route
 
-router.get("/:comment_id/edit", (req, res)=>{
+router.get("/:comment_id/edit", isLoggedIn, (req, res)=>{
     Comment.findById(req.params.comment_id, (err, foundComment)=>{
 	if(err){
 	    res.redirect('back');
@@ -57,7 +57,7 @@ router.get("/:comment_id/edit", (req, res)=>{
 
 // update route
 
-router.put("/:comment_id", (req, res)=>{
+router.put("/:comment_id", isLoggedIn, (req, res)=>{
     Comment.findByIdAndUpdate(req.params.comment_id, req.body.comment, (err, updatedComment)=>{
 	if(err){
 	    res.redirect('back');

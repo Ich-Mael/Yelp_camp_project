@@ -1,6 +1,6 @@
 //jshint esversion: 6
-
-const app = (require("express"))();
+const express = require('express');
+const app = express();
 const bodyParser = require("body-parser");
 const mongoose = require('mongoose');
 const passport = require("passport");
@@ -20,10 +20,11 @@ mongoose.connect("mongodb://localhost/yelp-camp",{useNewUrlParser: true, useUnif
 
 app.use(bodyParser.urlencoded({extended: true}));
 app.set("view engine", "ejs");
-app.use(methodOverride("_method"));
+app.use(express.static(__dirname + "/public"));
+app.use(methodOverride("_method")); 
 
-// Passport Configuration
-app.use(require("express-session")({
+// Passport Configuration 
+ app.use(require("express-session")({
     secret: "I really don't care who you are",
     resave: false,
     saveUninitialized: false
