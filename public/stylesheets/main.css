@@ -1,9 +1,19 @@
-body{
- background-image: url('https://media.gettyimages.com/photos/-picture-id1181837190?s=2048x2048');
+
+html, body{ height:100%; margin:0; }
+footer{ height:50px; background:PapayaWhip; }
+
+/* Trick */
+body{ 
+  display:flex; 
+  flex-direction:column; 
+ background-image: url('https://media.gettyimages.com/photos/-picture-id1181837189?s=2048x2048');
             background-repeat: no-repeat;
             background-attachment: fixed;
             background-position: cover;
-            
+ 
 }
 
-
+#footer{
+  margin-top:auto; 
+}
+ 
