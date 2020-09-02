@@ -88,6 +88,7 @@ router.put("/:id", middlewareObj.checkCampgroundOwnership, (req, res) => {
         if (err) {
             res.redirect("/campgrounds");
         } else {
+    req.flash("Success", "Campground successfully updated!");
             res.redirect("/campgrounds/" + req.params.id);
         }
     });
@@ -99,7 +100,8 @@ router.delete("/:id", middlewareObj.checkCampgroundOwnership, (req, res) => {
     Campground.findByIdAndRemove(req.params.id, (err) => {
         if (err) {
             res.redirect("/campgrounds");
-        } else {
+        } else {  
+    req.flash("Success", "Campground successfully deleted!");
             res.redirect("/campgrounds");
         }
     });

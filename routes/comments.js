@@ -36,6 +36,7 @@ router.post("/", middlewareObj.isLoggedIn, (req,res)=>{
 		comment.save();  
 		campground.comments.push(comment);
 		campground.save();
+		req.flash("Success", "Comment Successfully Added!");
 		res.redirect("/campgrounds/" + campground.id);
 	    });
 	}
@@ -51,7 +52,6 @@ router.get("/:comment_id/edit",  middlewareObj.isLoggedIn, (req, res)=>{
 	    res.redirect('back');
 	}else{
 	    res.render("comments/edit", {campground_id: req.params.id, comment: foundComment }); 
-	    
 	}
     }); 
 });
@@ -63,6 +63,7 @@ router.put("/:comment_id",  middlewareObj.isLoggedIn, (req, res)=>{
 	if(err){
 	    res.redirect('back');
 	}else{
+		req.flash("Success", "Comment Successfully Edited!");
 	    res.redirect("/campgrounds/" + req.params.id);
 	}
     });
@@ -75,6 +76,7 @@ router.delete("/:comment_id",  middlewareObj.isLoggedIn, (req, res)=>{
 	if(err){
 	    res.redirect('back');
 	}else{
+		req.flash("Success", "Comment Successfully Deleted!");
 	    res.redirect('/campgrounds/' + req.params.id);
 	}
     });
