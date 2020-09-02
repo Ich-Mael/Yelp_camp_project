@@ -1,5 +1,6 @@
 // all middleware goes here
 const Campground = require('../models/campground');
+const Comment = require('../models/comment');
 const middlewareObj = {};
 
 //function to check login state
@@ -7,6 +8,7 @@ middlewareObj.isLoggedIn = function(req, res, next){
     if(req.isAuthenticated()){
         return next();
     }
+    req.flash("Error", "Please Login First!!");
     res.redirect("/login");
 }
 

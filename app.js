@@ -3,6 +3,7 @@ const express = require('express');
 const app = express();
 const bodyParser = require("body-parser");
 const mongoose = require('mongoose');
+const flash = require('connect-flash');
 const passport = require("passport");
 const LocalStrategy = require("passport-local");
 const methodOverride = require("method-override");
@@ -21,6 +22,7 @@ app.use(bodyParser.urlencoded({extended: true}));
 app.set("view engine", "ejs");
 app.use(express.static(__dirname + "/public"));
 app.use(methodOverride("_method")); 
+app.use(flash());
 
 // Passport Configuration 
  app.use(require("express-session")({
@@ -41,6 +43,8 @@ passport.deserializeUser(User.deserializeUser());
 
 app.use(function(req, res, next){
     res.locals.currentUser = req.user;
+    res.locals.error = req.flash("Error");
+    res.locals.success = req.flash("Success");
     next();
 });
 
@@ -78,6 +82,6 @@ app.get("*", (req, res)=>{
 });
 
 
-app.listen(3000, ()=>{
+app.listen(3030, ()=>{
     console.log("Server has Started");
 });
