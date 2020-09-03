@@ -16,7 +16,12 @@ const commentRoutes = require("./routes/comments"),
       campgroundRoutes = require("./routes/campgrounds"),
       authRoutes = require("./routes/authentication");
 
-mongoose.connect("mongodb://localhost/yelp-camp",{useNewUrlParser: true, useUnifiedTopology: true});
+const connectDB = require('./connection');
+
+connectDB();
+// mongoose.connect("mongodb://localhost/yelp-camp",{useNewUrlParser: true, useUnifiedTopology: true});
+
+
 
 app.use(bodyParser.urlencoded({extended: true}));
 app.set("view engine", "ejs");
