@@ -20,6 +20,8 @@ const connectDB = require('./connection');
 
 connectDB();
 // mongoose.connect("mongodb://localhost/yelp-camp",{useNewUrlParser: true, useUnifiedTopology: true});
+
+// this is important to deploy to heroku
 const port = process.env.PORT || 3030;
 
 app.use(bodyParser.urlencoded({extended: true}));
