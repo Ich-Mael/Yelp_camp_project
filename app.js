@@ -56,7 +56,7 @@ app.use(function(req, res, next){
 });
 
 app.use("/campgrounds/:id/comments", commentRoutes);
-app.use("/campgrounds", campgroundRoutes);
+app.use(campgroundRoutes);
 app.use(authRoutes);
 
 

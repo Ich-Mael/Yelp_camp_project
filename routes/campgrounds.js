@@ -7,7 +7,7 @@ const Comment = require("../models/comment");
 const middlewareObj = require('../middleware');
 //campgrounds route
 
-router.get("/", (req, res) => {
+router.get("/campgrounds", (req, res) => {
     // gettind all campgrounds from the DB.
     Campground.find({}, (err, allCampgrounds) => {
         if (err) {
@@ -23,7 +23,7 @@ router.get("/", (req, res) => {
 
 // adding a post to allow a user to add a campgrounds
 
-router.post("/", middlewareObj.isLoggedIn, (req, res) => {
+router.post("/campgrounds", middlewareObj.isLoggedIn, (req, res) => {
     //get a data from a form
 
     let campName = req.body.campName;
@@ -52,13 +52,13 @@ router.post("/", middlewareObj.isLoggedIn, (req, res) => {
 });
 // form for a new campground
 
-router.get("/new", middlewareObj.isLoggedIn, (req, res) => {
+router.get("/campgrounds/new", middlewareObj.isLoggedIn, (req, res) => {
     res.render("campgrounds/new");
 });
 
 // Show route --- for more description
 
-router.get("/:id", (req, res) => {
+router.get("/campgrounds/:id", (req, res) => {
     let id = req.params.id;
     Campground.findById(id).populate("comments").exec((err, foundCampground) => {
         if (err) {
@@ -71,7 +71,7 @@ router.get("/:id", (req, res) => {
 
 // Edit Campground Route
 
-router.get("/:id/edit", middlewareObj.checkCampgroundOwnership, (req, res) => {
+router.get("/campgrounds/:id/edit", middlewareObj.checkCampgroundOwnership, (req, res) => {
     Campground.findById(req.params.id, (err, foundCampground) => {
         if (err) {
             res.render("/campgrounds");
@@ -82,7 +82,7 @@ router.get("/:id/edit", middlewareObj.checkCampgroundOwnership, (req, res) => {
 });
 // update Campground
 
-router.put("/:id", middlewareObj.checkCampgroundOwnership, (req, res) => {
+router.put("/campgrounds/:id", middlewareObj.checkCampgroundOwnership, (req, res) => {
     Campground.findByIdAndUpdate(req.params.id, req.body.campground, (err, updatedCampground) => {
         if (err) {
             res.redirect("/campgrounds");
@@ -95,7 +95,7 @@ router.put("/:id", middlewareObj.checkCampgroundOwnership, (req, res) => {
 
 // Destroy campground route
 
-router.delete("/:id", middlewareObj.checkCampgroundOwnership, (req, res) => {
+router.delete("/campgrounds/:id", middlewareObj.checkCampgroundOwnership, (req, res) => {
     Campground.findByIdAndRemove(req.params.id, (err) => {
         if (err) {
             res.redirect("/campgrounds");
