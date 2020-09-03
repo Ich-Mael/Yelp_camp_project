@@ -2,12 +2,12 @@
 const express = require('express');
 const app = express();
 const bodyParser = require("body-parser");
-// const mongoose = require('mongoose');
+const mongoose = require('mongoose');
 const flash = require('connect-flash');
 const passport = require("passport");
 const LocalStrategy = require("passport-local");
 const methodOverride = require("method-override");
-
+require('dotenv/config');
 const Comment = require("./models/comment");
 const Campground = require("./models/campground");
 const User = require("./models/user");
@@ -16,11 +16,17 @@ const commentRoutes = require("./routes/comments"),
       campgroundRoutes = require("./routes/campgrounds"),
       authRoutes = require("./routes/authentication");
 
-const connectDB = require('./connection');
+const port = process.env.PORT || 3030;
+
+// mongoose.connect("mongodb://localhost/yelp-camp",{useNewUrlParser: true, useUnifiedTopology: true});
+connectDB = async()=>{
+mongoose
+     .connect(process.env.DB_connection, { useNewUrlParser: true, useCreateIndex: true, useUnifiedTopology: true })
+     .then(() => console.log('Database Connected'))
+     .catch(err => console.log(err));
+}
 
 connectDB();
-// mongoose.connect("mongodb://localhost/yelp-camp",{useNewUrlParser: true, useUnifiedTopology: true});
-const port = process.env.PORT || 3030;
 
 app.use(bodyParser.urlencoded({extended: true}));
 app.set("view engine", "ejs");
