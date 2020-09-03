@@ -20,6 +20,7 @@ const connectDB = require('./connection');
 
 connectDB();
 // mongoose.connect("mongodb://localhost/yelp-camp",{useNewUrlParser: true, useUnifiedTopology: true});
+const port = process.env.PORT || 3030;
 
 app.use(bodyParser.urlencoded({extended: true}));
 app.set("view engine", "ejs");
@@ -86,6 +87,6 @@ app.get("*", (req, res)=>{
 });
 
 
-app.listen(3030, ()=>{
+app.listen(port, ()=>{
     console.log("Server has Started");
 });
