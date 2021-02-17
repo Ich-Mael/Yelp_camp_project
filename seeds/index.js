@@ -2,14 +2,13 @@ if(process.env.NODE_ENV !== "production"){
     require('dotenv').config();
 }
 
-
 // Required node modules
 const mongoose = require('mongoose');
 const campground = require('../models/campground');
 const cities = require('./cities');
 const {places, descriptors} = require('./seedHelpers');
-// bring in the app constants
 
+// bring in the app constants
 const { DB, PORT, SECRET } = require("../config");
 
 // connecting to the database
@@ -24,13 +23,14 @@ const connectDB = async () => {
         //app.listen(PORT, () => console.log('Server has started'));
     } catch (err) {
         console.log(err);
-        connectDB();
+        // connectDB();
     }
 };
 
 connectDB();
 
 const sample = array => array[Math.floor(Math.random()*array.length)];
+
 // seed data in the DB
 const seedDb = async()=> {
     await campground.deleteMany({}); 
@@ -41,6 +41,7 @@ const seedDb = async()=> {
             title:`${sample(descriptors)} ${sample(places)}`, 
             location: `${cities[rand1000].city}-${cities[rand1000].state}`
         });
+
 // Saving data to the DB
         await newCamp.save();
     }

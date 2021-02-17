@@ -2,11 +2,11 @@ if(process.env.NODE_ENV !== "production"){
     require('dotenv').config();
 }
 
-
 // Required node modules
 const express = require('express');
 const path = require('path');
 const mongoose = require('mongoose');
+const Campground = require('./models/campground');
 const app = express();
 
 // bring in the app constants
@@ -22,7 +22,6 @@ const connectDB = async () => {
                 useCreateIndex: true,
                 useUnifiedTopology: true })
             .then(() => console.log('Database Connected'));
-        app.listen(PORT, () => console.log('Server has started'));
     } catch (err) {
         console.log(err);
         connectDB();
@@ -40,3 +39,27 @@ app.get('/', (req, res)=>{
     res.render('home');
 });
 
+// Campgrounds route
+app.get('/campgrounds', async(req, res)=>{
+    const campgrounds = await Campground.find({});
+    res.render('campgrounds/index', {campgrounds});
+});
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+app.listen(PORT, ()=> console.log('Server has started'));
