@@ -6,6 +6,7 @@ if(process.env.NODE_ENV !== "production"){
 const express = require('express');
 const path = require('path');
 const mongoose = require('mongoose');
+const ejsMate = require('ejs-mate');
 const Campground = require('./models/campground');
 const app = express();
 
@@ -30,9 +31,16 @@ const connectDB = async () => {
 
 connectDB();
 
+// setting up ejs-mate
+app.engine('ejs', ejsMate);
 // setting up ejs
 app.set('view engine', 'ejs');
 app.set('views', path.join(__dirname, 'views'));
+
+// parsing the body
+app.use(express.urlencoded({extended: true}));
+
+
 
 // home route
 app.get('/', (req, res)=>{
@@ -45,24 +53,24 @@ app.get('/campgrounds', async(req, res)=>{
     res.render('campgrounds/index', {campgrounds});
 });
 
+// form for adding a new post
+app.get('/campgrounds/new', (req, res)=>{
+    res.render('campgrounds/new');
+});
+
+// add
+
+app.post('/campgrounds', async(req, res)=>{
+    const campground = new Campground(req.body.campground);
+    await campground.save();
+    res.redirect(`/campgrounds/${campground._id}`);
+});
+
 // campground show route
 app.get('/campgrounds/:id', async(req, res)=>{
     const campground = await Campground.findById(req.params.id);
     res.render('campgrounds/show', {campground});
 });
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 
